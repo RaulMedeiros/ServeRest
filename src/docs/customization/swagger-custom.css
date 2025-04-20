@@ -1,0 +1,153 @@
+/* Estilos personalizados para o Swagger UI */
+
+/* Cores da identidade visual: roxo (#7900e2) e preto (#000000) */
+
+/* Estilo da barra superior */
+.swagger-ui .topbar {
+  background-color: #000000;
+  border-bottom: 20px solid #7900e2;
+  padding: 10px 0;
+}
+
+/* Logo na barra superior */
+.topbar-wrapper img {
+  content: url(https://user-images.githubusercontent.com/29241659/118382797-365f3900-b5cf-11eb-9c82-0298a5c75b7e.png);
+  width: 150px;
+  height: auto;
+}
+
+/* Estilização geral */
+.swagger-ui .info {
+  margin: 20px 0;
+}
+
+.swagger-ui .scheme-container {
+  background-color: #f8f8f8;
+  box-shadow: none;
+  margin: 0;
+  padding: 20px 0;
+}
+
+/* Botões de ação */
+.swagger-ui .btn.execute {
+  background-color: #7900e2;
+  border-color: #7900e2;
+}
+
+.swagger-ui .btn.authorize {
+  background-color: #000000;
+  border-color: #000000;
+  color: #ffffff;
+}
+
+.swagger-ui .try-out__btn {
+  background-color: #7900e2;
+  border-color: #7900e2;
+  color: #ffffff;
+}
+
+/* Estilização dos blocos de operação */
+.swagger-ui .opblock.opblock-post {
+  border-color: #7900e2;
+  background: rgba(121, 0, 226, 0.1);
+}
+
+.swagger-ui .opblock.opblock-post .opblock-summary {
+  border-color: #7900e2;
+}
+
+.swagger-ui .opblock.opblock-post .opblock-summary-method {
+  background: #7900e2;
+}
+
+/* Mantendo cores padrão para outros métodos */
+.swagger-ui .opblock.opblock-get {
+  border-color: #61affe;
+}
+
+.swagger-ui .opblock.opblock-delete {
+  border-color: #f93e3e;
+}
+
+.swagger-ui .opblock.opblock-put {
+  border-color: #fca130;
+}
+
+/* Melhorias de design para tabelas */
+.swagger-ui table {
+  margin: 0;
+}
+
+.swagger-ui .response-col_status {
+  width: 20%;
+}
+
+.swagger-ui .response-col_description {
+  width: 80%;
+}
+
+/* Melhorias de design para seções e blocos */
+.swagger-ui .opblock-tag {
+  border-radius: 4px;
+}
+
+.swagger-ui .opblock-tag:hover {
+  background-color: rgba(121, 0, 226, 0.1);
+}
+
+.swagger-ui .opblock {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+}
+
+.swagger-ui .opblock-summary {
+  padding: 8px;
+}
+
+/* Melhorias de design para formulários */
+.swagger-ui .parameter__name, 
+.swagger-ui .parameter__type {
+  font-weight: 600;
+}
+
+.swagger-ui input {
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.swagger-ui select {
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.swagger-ui textarea {
+  border-radius: 4px;
+}
+
+/* Layout e tipografia */
+.swagger-ui .wrapper {
+  padding: 0 20px;
+}
+
+.swagger-ui .info .title {
+  font-size: 28px;
+  color: #32325d;
+}
+
+.swagger-ui .servers-title {
+  margin: 10px 0;
+}
+
+.swagger-ui .servers {
+  margin: 10px 0;
+}
+
+/* Links */
+.swagger-ui .info a {
+  color: #7900e2;
+}
+
+.swagger-ui .info a:hover {
+  color: #6200b3;
+}

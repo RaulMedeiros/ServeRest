@@ -1,4 +1,3 @@
-
 <h1 align="center">ServeRest</h1>
 
 <i><h4 align="center">Servidor REST para estudo de testes de API</h4></i>
@@ -29,6 +28,18 @@ _ServeRest_ permite o estudo de:
 - Autenticação no header
 - Query string
 - Teste de schema json
+
+## Documentação da API
+
+O ServeRest oferece uma documentação completa da API baseada no Swagger UI, acessível na raiz do projeto (`/`). A documentação inclui:
+
+- Interface moderna com as cores da identidade visual (roxo e preto)
+- Playground interativo para testar todas as rotas da API diretamente pelo navegador
+- Documentação completa dos endpoints, parâmetros e respostas
+- Link para o repositório do projeto no GitHub
+- Logo do ServeRest exibido no topo
+
+![Print da documentação moderna do ServeRest](https://user-images.githubusercontent.com/29241659/97096352-49b1b380-1641-11eb-9b0a-5bb72e1b3882.png)
 
 <b><h2 align="center">Ambientes disponíveis</h2></b>
 

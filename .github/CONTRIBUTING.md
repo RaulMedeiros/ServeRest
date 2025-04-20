@@ -1,4 +1,3 @@
-
 # Como contribuir
 
 [![Continuous Delivery](https://github.com/ServeRest/ServeRest/actions/workflows/continuous_delivery.yml/badge.svg)](https://github.com/ServeRest/ServeRest/actions/workflows/continuous_delivery.yml)
@@ -219,6 +218,18 @@ A documentação, disponibilizada nas URLs <https://serverest.dev> e <http://loc
 Para atualizar:
 1. Acesse o arquivo [swagger.json](../docs/swagger.json) e o edite de acordo com sua necessidade.
 1. Execute o comando `make run-dev` para acompanhar o status da documentação alterada na URL <http://localhost:3000>.
+
+### Customização da interface de documentação
+
+A interface de documentação do ServeRest utiliza o Swagger UI com customizações para manter a identidade visual (cores roxas e pretas) e adicionar recursos como o link para o GitHub.
+
+Os arquivos de personalização estão no diretório [`src/docs/customization/`](../src/docs/customization/):
+
+- `swagger-custom.css` - Estilos CSS personalizados
+- `github-plugin.js` - Plugin para adicionar o link do GitHub
+- `swagger-config.js` - Configurações e integração do Swagger UI
+
+Um README detalhado com instruções sobre como modificar a personalização está disponível em [`src/docs/customization/README.md`](../src/docs/customization/README.md).
 
 ## Reconhecimento de contribuição
 
