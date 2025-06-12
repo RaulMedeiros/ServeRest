@@ -1,0 +1,181 @@
+{
+  "info": {
+    "_postman_id": "a2f4d981-fdd5-4c1a-8a8a-826f2519e73e",
+    "name": "ServeRest Estoque Carrinho",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Cadastrar usuário admin",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "if(!pm.environment.get('base_url')) pm.environment.set('base_url', 'http://localhost:3000');",
+              "pm.environment.set('email', `user_${Date.now()}@example.com`);",
+              "pm.environment.set('password', '123456');"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Usuário criado', function () { pm.response.to.have.status(201); });",
+              "pm.environment.set('userId', pm.response.json()._id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Usuário Teste\",\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\",\n  \"administrador\": \"true\"\n}"
+        },
+        "url": "{{base_url}}/usuarios"
+      }
+    },
+    {
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Login efetuado', function () { pm.response.to.have.status(200); });",
+              "pm.environment.set('token', pm.response.json().authorization);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+        },
+        "url": "{{base_url}}/login"
+      }
+    },
+    {
+      "name": "Cadastrar produto",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Produto cadastrado', function () { pm.response.to.have.status(201); });",
+              "var res = pm.response.json();",
+              "pm.environment.set('productId', res._id);",
+              "pm.environment.set('initialStock', 5);",
+              "pm.environment.set('addedQuantity', 2);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "{{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Produto Teste\",\n  \"preco\": 100,\n  \"descricao\": \"Item de teste\",\n  \"quantidade\": 5\n}"
+        },
+        "url": "{{base_url}}/produtos"
+      }
+    },
+    {
+      "name": "Adicionar produto ao carrinho",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Carrinho cadastrado', function () { pm.response.to.have.status(201); });",
+              "pm.environment.set('cartId', pm.response.json()._id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "{{token}}"}
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"produtos\": [\n    { \n      \"idProduto\": \"{{productId}}\",\n      \"quantidade\": 2\n    }\n  ]\n}"
+        },
+        "url": "{{base_url}}/carrinhos"
+      }
+    },
+    {
+      "name": "Validar estoque reduzido",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const qtd = pm.response.json().quantidade;",
+              "pm.test('Estoque reduzido', function () { pm.expect(qtd).to.eql(Number(pm.environment.get('initialStock')) - Number(pm.environment.get('addedQuantity'))); });",
+              "pm.environment.set('stockAfterCart', qtd);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/produtos/{{productId}}"
+      }
+    },
+    {
+      "name": "Cancelar carrinho",
+      "event": [],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {"key": "Authorization", "value": "{{token}}"}
+        ],
+        "url": "{{base_url}}/carrinhos/cancelar-compra"
+      }
+    },
+    {
+      "name": "Validar estoque restaurado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const qtd = pm.response.json().quantidade;",
+              "pm.test('Estoque restabelecido', function () { pm.expect(qtd).to.eql(Number(pm.environment.get('initialStock'))); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/produtos/{{productId}}"
+      }
+    }
+  ]
+}
